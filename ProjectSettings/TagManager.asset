@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Paddle
   - Ball
-  - AIPaddle
-  - LeftWall
-  - RightWall
+  - Wall
+  - LeftGoal
+  - RightGoal
+  - Paddle
   layers:
   - Default
   - TransparentFX

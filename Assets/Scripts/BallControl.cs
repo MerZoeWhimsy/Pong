@@ -1,60 +1,80 @@
-using UnityEditor.Experimental.GraphView;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class BallControl : MonoBehaviour
 {
     public float speed = 10f;
-    public float addZ = 4f;
-    public int playerScore = 0;
-    public int aiScore = 0;
+    public float addZ = 2f;
+
     private Rigidbody rb;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("BallControl: No Rigidbody on this GameObject.");
+        }
+    }
+
+    private void Start()
+    {
+        if (rb == null) return;
+
         rb.useGravity = false;
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
         rb.linearVelocity = Vector3.right * speed;
     }
 
-  
-
-    void OnCollisionEnter(Collision c)
+    private void OnCollisionEnter(Collision other)
     {
-    rb.linearVelocity = Vector3.Reflect(
-            rb.linearVelocity,
-            c.contacts[0].normal
-            ).normalized * speed;
+        Debug.Log("Ball hit " + other.collider.name + " (tag: " + other.collider.tag + ")");
 
-        if (c.collider.CompareTag("RightWall"))
-        {
-            playerScore += 1;
-            Debug.Log($"Player: {playerScore} | AI: {aiScore}");
-            ResetBall(-1);
-        }
-        else if (c.collider.CompareTag("LeftWall"))
-        {
-            aiScore += 1;
-            Debug.Log($"Player: {playerScore} | AI: {aiScore}");
-            ResetBall(1);
-        }
-    }
+        if (rb == null) return;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("AIPaddle") || other.CompareTag("Paddle"))
+        var playerPaddle = other.collider.GetComponentInParent<PaddleControl>();
+        var aiPaddle = other.collider.GetComponentInParent<AIPaddle>();
+
+        if (playerPaddle != null || aiPaddle != null)
         {
+            Transform paddle = (aiPaddle != null ? aiPaddle.transform : playerPaddle.transform);
+            float deltaZ = transform.position.z - paddle.position.z;
+
             Vector3 v = rb.linearVelocity;
-            float deltaZ = transform.position.z - other.transform.position.z;
             v.x = -v.x;
             v.z += deltaZ * addZ;
-            rb.linearVelocity = v.normalized * speed;
-        }
-    }
 
-    void ResetBall(int direction)
-    {
-        transform.position = Vector3.zero;
-        rb.linearVelocity = Vector3.right * direction * speed;
+            rb.linearVelocity = v.normalized * speed;
+            return;
+        }
+
+        if (other.collider.CompareTag("Wall"))
+        {
+            Vector3 v = rb.linearVelocity;
+            v.z = -v.z;
+            rb.linearVelocity = v.normalized * speed;
+            return;
+        }
+
+        if (other.collider.CompareTag("LeftGoal"))
+        {
+            Debug.Log("Hit LeftGoal");
+
+            Vector3 v = rb.linearVelocity;
+            v.x = Mathf.Abs(v.x);
+            rb.linearVelocity = v.normalized * speed;
+            return;
+        }
+
+        if (other.collider.CompareTag("RightGoal"))
+        {
+            Debug.Log("Hit RightGoal");
+            Vector3 v = rb.linearVelocity;
+            v.x = -Mathf.Abs(v.x);
+            rb.linearVelocity = v.normalized * speed;
+            return;
+        }
     }
 }

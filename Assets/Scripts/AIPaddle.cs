@@ -4,16 +4,21 @@ public class AIPaddle : MonoBehaviour
 {
     public Transform ball;
     public float speed = 8f;
-    public float reactionDelay = 0.3f;
-    public float zMin = -10f;
-    public float zMax = 10f;
+    public float zMin = 0f;
+    public float zMax = 0f;
+    public float error = 3f;
 
-    private float targetZ;
-
-     void Update()
+    private void Update()
     {
-        if (ball == null) return;
-         targetZ = Mathf.Lerp(targetZ,ball.position.z, Time.deltaTime / reactionDelay);
+        if (ball == null)
+        {
+            Debug.LogWarning("AIPaddle: ball is NOT assigned!");
+            return;
+        }
+
+        float currentError = Random.Range(-error, error);
+        float targetZ = ball.position.z + Random.Range(-error, error);
+
         Vector3 position = transform.position;
         position.z = Mathf.MoveTowards(position.z, targetZ, speed * Time.deltaTime);
         position.z = Mathf.Clamp(position.z, zMin, zMax);
