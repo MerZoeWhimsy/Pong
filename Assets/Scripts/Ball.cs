@@ -33,29 +33,15 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Ball hit: " + collision.collider.name);
-        if (collision.collider.name == "RightWall")
+
+        PositionDirection pd = collision.collider.GetComponent<PositionDirection>();
+
+        if (pd != null)
         {
-            playerScore++;
-            UpdateScoreUI();
-            ResetBall();
-            return;
-        }
-        if (collision.collider.name == "LeftWall")
-        {
-            aiScore++;
-            UpdateScoreUI();
-            ResetBall();
-            return;
-        }
-        if (collision.collider.name == "BottomWall" || collision.collider.name == "TopWall")
-        {
-            direction.z = -direction.z;
-            return;
-        }
-        if (collision.collider.name == "RightPaddle" || collision.collider.name == "LeftPaddle")
-        {
-            direction.x = -direction.x;
-            return;
+            if (pd.d)
+                direction.x = -direction.x;
+            else 
+                direction.z = -direction.z;
         }
     }
 
@@ -64,24 +50,27 @@ public class Ball : MonoBehaviour
         float x;
         float z;
 
-        do
-        {
-            x = Random.Range(-1f, 1f);
-            z = Random.Range(1f, 1f);
-        }
+        /* do
+         {
+             x = Random.Range(-1f, 1f);
+             z = Random.Range(-1f, 1f);
+         }
 
-        while (Mathf.Abs(x) < 0.5f);
+         while (Mathf.Abs(x) < 0.5f)*/
+
+        x = Random.Range(-0.5f, 0.5f) + 1;
+        z = Random.Range(-1f, 1f);
 
         direction = new Vector3(x, 0, z);
         direction.Normalize();
     }
-    private void ResetBall()
+    public void ResetBall()
     {
         CenterBall();
         SetRandomDirection();
     }
 
-    private void UpdateScoreUI()
+    public void UpdateScoreUI()
     {
         if (scoreText != null)
         {

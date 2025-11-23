@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 481696696}
   - component: {fileID: 481696695}
   - component: {fileID: 481696694}
+  - component: {fileID: 481696698}
   m_Layer: 0
   m_Name: TopWall
   m_TagString: Wall
@@ -408,6 +409,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481696698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481696693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b623c087687d84eb50ab5bcd193118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d: 0
 --- !u!1 &495541894
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +435,7 @@ GameObject:
   - component: {fileID: 495541897}
   - component: {fileID: 495541896}
   - component: {fileID: 495541895}
+  - component: {fileID: 495541900}
   m_Layer: 0
   m_Name: LeftPaddle
   m_TagString: Paddle
@@ -462,7 +477,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.502454, y: 1, z: 1.0708448}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &495541897
 MeshRenderer:
@@ -532,6 +547,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495541900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495541894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b623c087687d84eb50ab5bcd193118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d: 1
 --- !u!1 &538454982
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +572,7 @@ GameObject:
   - component: {fileID: 538454985}
   - component: {fileID: 538454984}
   - component: {fileID: 538454983}
+  - component: {fileID: 538454987}
   m_Layer: 0
   m_Name: LeftWall
   m_TagString: Wall
@@ -640,6 +669,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538454987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538454982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12e34642ca63e5428e270c68e4effc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
 --- !u!1 &655791852
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,6 +954,7 @@ GameObject:
   - component: {fileID: 900846925}
   - component: {fileID: 900846924}
   - component: {fileID: 900846923}
+  - component: {fileID: 900846927}
   m_Layer: 0
   m_Name: RightWall
   m_TagString: Wall
@@ -934,7 +977,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1008,6 +1051,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900846927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900846922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12e34642ca63e5428e270c68e4effc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
 --- !u!1 &1186058195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,8 +1077,9 @@ GameObject:
   - component: {fileID: 1186058198}
   - component: {fileID: 1186058197}
   - component: {fileID: 1186058196}
+  - component: {fileID: 1186058201}
   m_Layer: 0
-  m_Name: RightPaddle
+  m_Name: AiPaddle
   m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1121,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.502454, y: 1, z: 1.0708448}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1186058198
 MeshRenderer:
@@ -1134,6 +1191,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1186058201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186058195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b623c087687d84eb50ab5bcd193118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d: 1
 --- !u!1 &1432809471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1220,7 @@ GameObject:
   - component: {fileID: 1432809472}
   m_Layer: 0
   m_Name: NewBall
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1435,6 +1505,7 @@ GameObject:
   - component: {fileID: 1584439916}
   - component: {fileID: 1584439915}
   - component: {fileID: 1584439918}
+  - component: {fileID: 1584439919}
   m_Layer: 0
   m_Name: BottomWall
   m_TagString: Wall
@@ -1531,6 +1602,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1584439919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584439913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b623c087687d84eb50ab5bcd193118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  d: 0
 --- !u!1 &1607004645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,7 +1797,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
